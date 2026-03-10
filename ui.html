@@ -1,17 +1,136 @@
-<h2>Rectangle Creator</h2>
-<p>Count: <input id="count" type="number" value="5"></p>
-<button id="create">Create</button>
-<button id="cancel">Cancel</button>
-<script>
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8" />
+  <title>QRPro+ Generator</title>
+  <style>
+    body {
+      font-family: Inter, sans-serif;
+      padding: 16px;
+      margin: 0;
+      background: #ffffff;
+      color: #111111;
+    }
 
-document.getElementById('create').onclick = () => {
-  const textbox = document.getElementById('count');
-  const count = parseInt(textbox.value, 10);
-  parent.postMessage({ pluginMessage: { type: 'create-shapes', count } }, '*')
-}
+    h2 {
+      margin-top: 0;
+      margin-bottom: 16px;
+      font-size: 18px;
+    }
 
-document.getElementById('cancel').onclick = () => {
-  parent.postMessage({ pluginMessage: { type: 'cancel' } }, '*')
-}
+    label {
+      display: block;
+      font-size: 12px;
+      font-weight: 600;
+      margin-bottom: 6px;
+      margin-top: 12px;
+    }
 
-</script>
+    input {
+      width: 100%;
+      box-sizing: border-box;
+      padding: 10px;
+      border: 1px solid #d0d0d0;
+      border-radius: 8px;
+      font-size: 12px;
+    }
+
+    .row {
+      display: flex;
+      gap: 10px;
+    }
+
+    .row > div {
+      flex: 1;
+    }
+
+    .buttons {
+      display: flex;
+      gap: 10px;
+      margin-top: 18px;
+    }
+
+    button {
+      flex: 1;
+      border: none;
+      border-radius: 8px;
+      padding: 12px;
+      font-size: 12px;
+      font-weight: 600;
+      cursor: pointer;
+    }
+
+    #generate {
+      background: #30D4BB;
+      color: #000000;
+    }
+
+    #cancel {
+      background: #eeeeee;
+      color: #111111;
+    }
+
+    .small {
+      font-size: 11px;
+      color: #666666;
+      margin-top: 10px;
+      line-height: 1.4;
+    }
+  </style>
+</head>
+<body>
+  <h2>QRPro+ Generator</h2>
+
+  <label for="url">Website URL</label>
+  <input id="url" type="text" placeholder="https://example.com" />
+
+  <label for="size">Size (px)</label>
+  <input id="size" type="number" value="240" min="100" max="2000" />
+
+  <div class="row">
+    <div>
+      <label for="foreground">Foreground</label>
+      <input id="foreground" type="text" value="#000000" />
+    </div>
+    <div>
+      <label for="background">Background</label>
+      <input id="background" type="text" value="#ffffff" />
+    </div>
+  </div>
+
+  <div class="buttons">
+    <button id="generate">Generate</button>
+    <button id="cancel">Cancel</button>
+  </div>
+
+  <p class="small">
+    This is Version 1: a basic QR-style placeholder inserted as SVG into Figma.
+  </p>
+
+  <script>
+    document.getElementById('generate').onclick = () => {
+      const url = document.getElementById('url').value;
+      const size = parseInt(document.getElementById('size').value, 10) || 240;
+      const foreground = document.getElementById('foreground').value || '#000000';
+      const background = document.getElementById('background').value || '#ffffff';
+
+      parent.postMessage(
+        {
+          pluginMessage: {
+            type: 'generate-qr',
+            url,
+            size,
+            foreground,
+            background
+          }
+        },
+        '*'
+      );
+    };
+
+    document.getElementById('cancel').onclick = () => {
+      parent.postMessage({ pluginMessage: { type: 'cancel' } }, '*');
+    };
+  </script>
+</body>
+</html>
