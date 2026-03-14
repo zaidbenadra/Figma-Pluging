@@ -1,18 +1,14 @@
 {
-  "name": "Fist Pluging",
+  "name": "QR Generator Pro",
   "id": "1612927463228919391",
   "api": "1.0.0",
   "main": "code.js",
   "capabilities": [],
   "enableProposedApi": false,
   "documentAccess": "dynamic-page",
-  "editorType": [
-    "figma"
-  ],
+  "editorType": ["figma"],
   "ui": "ui.html",
   "networkAccess": {
-    "allowedDomains": [
-      "none"
-    ]
+    "allowedDomains": ["cdn.jsdelivr.net", "unpkg.com"]
   }
 }
