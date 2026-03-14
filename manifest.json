@@ -9,6 +9,6 @@
   "editorType": ["figma"],
   "ui": "ui.html",
   "networkAccess": {
-    "allowedDomains": ["cdn.jsdelivr.net", "unpkg.com"]
+    "allowedDomains": ["https://cdn.jsdelivr.net"]
   }
 }
